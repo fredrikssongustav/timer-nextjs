@@ -1,0 +1,26 @@
+{
+  "name": "timer-nextjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.1.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^9.3.2",
+    "@types/node": "^12.12.9",
+    "@types/react": "^16.9.11",
+    "jest": "^24.9.0",
+    "typescript": "^3.7.2"
+  }
+}
