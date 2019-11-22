@@ -1,8 +1,12 @@
 import Head from 'next/head';
 import * as React from 'react';
 
+const IndexForm: React.FC = () => {
+  return <div data-testid="index-form">asd</div>
+}
 
 const IndexPage: React.FC = () => {
+
   return (<div>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
@@ -15,7 +19,7 @@ const IndexPage: React.FC = () => {
         color: #fff;
       }
     `}</style>
-    <div data-testid="indexPage" />
+    <IndexForm />
   </div>)
 }
 
