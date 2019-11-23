@@ -2,7 +2,12 @@ import Head from 'next/head';
 import * as React from 'react';
 
 const IndexForm: React.FC = () => {
-  return <div data-testid="index-form">asd</div>
+  return (
+    <form data-testid="index-form">
+      <input data-testid="field-timeunit" />
+      <input data-testid="field-timetype" />
+      <h1></h1>
+    </form>)
 }
 
 const IndexPage: React.FC = () => {
