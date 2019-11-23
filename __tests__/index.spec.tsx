@@ -1,10 +1,19 @@
 import * as React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import IndexPage from '../pages/index/index'
+import IndexPage, { IndexForm } from '../pages/index/index'
 
 describe('Pages', () => {
 
-  describe('Index', () => {
+  describe('Form', () => {
+
+    it('should have a button that when fired submits the form', () => {
+      const spyFunction = jest.fn()
+      const { getByTestId } = render(<IndexForm someCallback={spyFunction} />)
+      const submitButton = getByTestId('submit-button')
+      expect(submitButton).toBeTruthy()
+      fireEvent.click(submitButton)
+      expect(spyFunction).toBeCalledTimes(1)
+    })
 
     it('should render sense-making input fields', function () {
       const { getByTestId } = render(<IndexPage />)
@@ -19,6 +28,9 @@ describe('Pages', () => {
       expect(timeAmountField.value).toBe("23")
 
     })
+  });
+
+  describe('Index', () => {
 
     it('should render some type of form', function () {
       const { getByTestId } = render(<IndexPage />)
@@ -29,7 +41,7 @@ describe('Pages', () => {
       const { getByTestId } = render(<IndexPage />)
       expect(getByTestId).toBeTruthy()
     })
-  })
+  });
 
 
-})
+});

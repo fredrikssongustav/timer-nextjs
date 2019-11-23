@@ -1,16 +1,24 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-const IndexForm: React.FC = () => {
+
+type IndexFormProps = {
+  someCallback: () => void
+}
+
+export const IndexForm: React.FC<IndexFormProps> = ({ someCallback }) => {
   return (
-    <form data-testid="index-form">
+    <form data-testid="index-form" onSubmit={someCallback}>
       <input data-testid="field-timeunit" />
       <input data-testid="field-timetype" />
-      <h1></h1>
+      <button data-testid="submit-button" />
     </form>)
 }
 
 const IndexPage: React.FC = () => {
+  const someCallback = () => {
+
+  }
 
   return (<div>
     <Head>
@@ -24,8 +32,8 @@ const IndexPage: React.FC = () => {
         color: #fff;
       }
     `}</style>
-    <IndexForm />
+    <IndexForm someCallback={someCallback} />
   </div>)
 }
 
-export default IndexPage;
+export default IndexPage
