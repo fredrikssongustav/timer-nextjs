@@ -1,22 +1,41 @@
 import Head from 'next/head';
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
-
-type IndexFormProps = {
-  someCallback: () => void
+type FormState = {
+  unit: string;
+  value: string;
 }
 
-export const IndexForm: React.FC<IndexFormProps> = ({ someCallback }) => {
+type IndexFormProps = {
+  submitForm: () => void;
+  formState: FormState;
+  updateState: any;
+}
+
+export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }) => {
   return (
-    <form data-testid="index-form" onSubmit={someCallback}>
-      <input data-testid="field-timeunit" />
-      <input data-testid="field-timetype" />
+    <form data-testid="index-form" onSubmit={submitForm}>
+      <input data-testid="field-timevalue" type="text" name="value" value={formState.value} onChange={updateState} />
+      <input data-testid="field-timeunit" type="text" name="unit" value={formState.unit} onChange={updateState} />
       <button data-testid="submit-button" />
     </form>)
 }
 
 const IndexPage: React.FC = () => {
-  const someCallback = () => {
+  const [state, setState] = useState<FormState>({ value: "0", unit: "h" })
+
+  const updateState = (event: React.FormEvent<HTMLInputElement>) => {
+    var newState = state;
+    const targetStateKey: string = event.currentTarget.name
+    const targetStateValue: string = event.currentTarget.value
+    if (targetStateKey === "value" || targetStateKey === "unit") {
+      newState[targetStateKey] = targetStateValue
+      setState(state => ({ ...state, newState }))
+    }
+  }
+
+  const submitForm = () => {
 
   }
 
@@ -32,7 +51,7 @@ const IndexPage: React.FC = () => {
         color: #fff;
       }
     `}</style>
-    <IndexForm someCallback={someCallback} />
+    <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
   </div>)
 }
 
