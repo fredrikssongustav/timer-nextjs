@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import IndexPage, { IndexForm } from '../pages/index/index'
+import IndexPage, { IndexForm } from '../pages/index'
 
 describe('Pages', () => {
 
