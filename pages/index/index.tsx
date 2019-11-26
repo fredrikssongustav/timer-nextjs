@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import Router from 'next/router'
 
 type FormState = {
   unit: string;
@@ -8,9 +9,9 @@ type FormState = {
 }
 
 type IndexFormProps = {
-  submitForm: () => void;
+  submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
   formState: FormState;
-  updateState: any;
+  updateState: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }) => {
@@ -35,7 +36,7 @@ const IndexPage: React.FC = () => {
     }
   }
 
-  const submitForm = () => {
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
 
   }
 
