@@ -37,7 +37,12 @@ const IndexPage: React.FC = () => {
   }
 
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-
+    event.preventDefault()
+    console.log(event)
+    Router.push({
+      pathname: '/clock',
+      query: state
+    })
   }
 
   return (<div>
