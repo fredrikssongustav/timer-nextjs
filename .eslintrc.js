@@ -62,7 +62,6 @@ module.exports = {
         'builtin',
         // npm deps e.g. `react` and `styled-components`.
         'external',
-        // Aliased paths e.g. `@tink/core`.
         // See https://github.com/benmosher/eslint-plugin-import/issues/1379#issuecomment-527466222.
         ['internal', 'unknown'],
         // Parent imports e.g. '../../foo'.
@@ -86,13 +85,13 @@ module.exports = {
     '@typescript-eslint/prefer-interface': 'off', // also want to use "type"
     '@typescript-eslint/explicit-function-return-type': 'off', // annoying to force return type
     '@typescript-eslint/member-ordering': 'off',
-    '@typescript-eslint/array-type': 'off',
+    '@typescript-eslint/array-type': 'on',
     '@typescript-eslint/jsx-key': 'off',
     '@typescript-eslint/no-string-literal': 'off',
-    '@typescript-eslint/no-empty': 'off',
+    '@typescript-eslint/no-empty': 'on',
     '@typescript-eslint/ordered-imports': 'off',
     '@typescript-eslint/jsx-no-lambda': 'on',
-    '@typescript-eslint/no-console': 'off',
+    '@typescript-eslint/no-console': 'on',
     '@typescript-eslint/max-classes-per-file': 'off',
     '@typescript-eslint/member-access': 'off',
     '@typescript-eslint/interface-name': ['on', 'never-prefix'],
@@ -110,7 +109,6 @@ module.exports = {
 
     'no-restricted-globals': ['error', 'isFinite', 'isNaN'].concat(confusingBrowserGlobals),
 
-    /** Tink specific rules  */
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
     'react/jsx-boolean-value': ['error', 'never'],
