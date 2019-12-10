@@ -4,7 +4,16 @@ import ClockPage from '../pages/clock'
 
 
 describe('Clock page', () => {
+    describe('should have a back button', () => {
+        it('that is existing', () => {
+            const { getByTestId } = render(<ClockPage />)
+            expect(getByTestId('back-button')).toBeTruthy()
+        });
+    })
+
     describe('should on init', () => {
+
+
         it('show something refered to as clock', () => {
             const { getByTestId } = render(<ClockPage />)
             expect(getByTestId('clock')).toBeTruthy()
