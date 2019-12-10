@@ -16,6 +16,12 @@ export type ClockProps = {
 }
 
 export const Clock: React.FC<ClockProps> = ({ unit, value }) => {
+
+    const [stopTime, setStopTime] = useState<number | undefined>(value)
+
+    if (!stopTime) {
+        return <div data-testid="failed-clock" />
+    }
     return (<div data-testid="clock" />);
 }
 

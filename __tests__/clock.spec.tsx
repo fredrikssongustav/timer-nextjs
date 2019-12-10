@@ -5,6 +5,13 @@ import ClockPage, { Clock, TIME_UNIT } from '../pages/clock'
 
 describe('Clock component', () => {
     describe('should exist', () => {
+
+
+        it('should be able to know when something is wrong', () => {
+            const { getByTestId } = render(<Clock unit={TIME_UNIT.s} value={undefined} />)
+            expect(getByTestId('failed-clock')).toBeTruthy()
+        });
+
         it('should be able to know something to count', () => {
             const { getByTestId } = render(<Clock unit={TIME_UNIT.s} value={5} />)
             expect(getByTestId('clock')).toBeTruthy()
