@@ -1,7 +1,10 @@
 import Head from 'next/head';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Router from 'next/router'
+import { StyledButton } from '../src/atoms/StyledButton';
+import { StyledInput } from '../src/atoms/StyledInput';
+import { StyledContainer } from '../src/containers/StyledContainer/StyledContainer';
 
 type FormState = {
   unit: string;
@@ -9,22 +12,24 @@ type FormState = {
 }
 
 type IndexFormProps = {
-  submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  submitForm: (event: React.ChangeEvent<HTMLFormElement>) => void;
   formState: FormState;
-  updateState: (event: React.FormEvent<HTMLInputElement>) => void;
+  updateState: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }) => {
   return (
     <form data-testid="index-form" onSubmit={submitForm}>
-      <input data-testid="field-timevalue" type="text" name="value" value={formState.value} onChange={updateState} />
-      <input data-testid="field-timeunit" type="text" name="unit" value={formState.unit} onChange={updateState} />
-      <button data-testid="submit-button" />
-    </form>)
-}
+      <StyledInput inputProps={{ "data-testid": "field-timevalue" }} type="text" name="value" value={formState.value} onChange={updateState} />
+      <StyledInput inputProps={{ "data-testid": "field-timeunit" }} type="text" name="unit" value={formState.unit} onChange={updateState} />
+      <StyledButton data-testid="submit-button" type="submit">
+        Launch timer
+     </StyledButton>
+    </form>);
+};
 
 const IndexPage: React.FC = () => {
-  const [state, setState] = useState<FormState>({ value: "0", unit: "h" })
+  const [state, setState] = useState<FormState>({ value: "10", unit: "second(s)" })
 
   const updateState = (event: React.FormEvent<HTMLInputElement>) => {
     var newState = state;
@@ -49,16 +54,20 @@ const IndexPage: React.FC = () => {
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
       <meta charSet="utf-8" />
+      <title>A Timer</title>
     </Head>
     <style>{`
       body { 
-        background: #313639;
         font: 11px menlo;
         color: #fff;
+        margin:0;
       }
     `}</style>
-    <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
-  </div>)
+    <StyledContainer>
+      <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
+    </StyledContainer>
+
+  </div >)
 }
 
 export default IndexPage
