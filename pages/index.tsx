@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import Router from 'next/router'
+import { useState } from 'react';
+import Router from 'next/router';
 
 type FormState = {
   unit: string;
@@ -14,36 +14,35 @@ type IndexFormProps = {
   updateState: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
-export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }) => {
+export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }: IndexFormProps) => {
   return (
     <form data-testid="index-form" onSubmit={submitForm}>
       <input data-testid="field-timevalue" type="text" name="value" value={formState.value} onChange={updateState} />
       <input data-testid="field-timeunit" type="text" name="unit" value={formState.unit} onChange={updateState} />
       <button data-testid="submit-button" />
-    </form>)
-}
+    </form>);
+};
 
 const IndexPage: React.FC = () => {
-  const [state, setState] = useState<FormState>({ value: "0", unit: "h" })
+  const [state, setState] = useState<FormState>({ value: "0", unit: "h" });
 
   const updateState = (event: React.FormEvent<HTMLInputElement>) => {
     var newState = state;
-    const targetStateKey: string = event.currentTarget.name
-    const targetStateValue: string = event.currentTarget.value
+    const targetStateKey: string = event.currentTarget.name;
+    const targetStateValue: string = event.currentTarget.value;
     if (targetStateKey === "value" || targetStateKey === "unit") {
-      newState[targetStateKey] = targetStateValue
-      setState(state => ({ ...state, newState }))
+      newState[targetStateKey] = targetStateValue;
+      setState(state => ({ ...state, newState }));
     }
-  }
+  };
 
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(event)
+    event.preventDefault();
     Router.push({
       pathname: '/clock',
       query: state
-    })
-  }
+    });
+  };
 
   return (<div>
     <Head>
@@ -58,7 +57,7 @@ const IndexPage: React.FC = () => {
       }
     `}</style>
     <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
-  </div>)
-}
+  </div>);
+};
 
-export default IndexPage
+export default IndexPage;
