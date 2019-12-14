@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import { StyledButton } from '../src/atoms/StyledButton';
 import { StyledContainer } from '../src/containers/StyledContainer/StyledContainer';
+import { StyledTimer } from '../src/organisms/StyledTimer/StyledTimer';
 
 export enum TIME_UNIT {
     h = "hour",
@@ -14,25 +15,6 @@ export enum TIME_UNIT {
 export type ClockProps = {
     unit: TIME_UNIT | undefined,
     value: number | undefined
-}
-
-type StyledTimerProps = {
-    progress: number;
-    color: string;
-}
-
-const StyledTimer: React.FC<StyledTimerProps> = ({progress,color}:StyledTimerProps) => {
-    return(<svg viewBox="0 0 36 36">
-    <path
-      d="M18 2.0845
-        a 15.9155 15.9155 0 0 1 0 31.831
-        a 15.9155 15.9155 0 0 1 0 -31.831"
-      fill="none"
-      stroke={color.toString()}
-      stroke-width="3"
-      stroke-dasharray={`${progress.toString()},100`}
-    />
-  </svg>);
 }
 
 export const Clock: React.FC<ClockProps> = ({ unit, value }) => {
@@ -66,9 +48,9 @@ export const Clock: React.FC<ClockProps> = ({ unit, value }) => {
     }
 
 
-    return (<div data-testid="clock" style={{ "height": "200px", "width": "200px" }}>
-        <StyledTimer progress={(refinedValue - stopTime)/refinedValue * 100} color="#000" />
-    </div>);
+    return (
+        <StyledTimer progress={(refinedValue - stopTime) / refinedValue * 100} color="#000" />
+    );
 }
 
 const ClockPage: React.FC = () => {
@@ -76,6 +58,8 @@ const ClockPage: React.FC = () => {
     // TODO: Don't set default values like this
     const query = router && router.query.value ? router.query : { value: 20, unit: TIME_UNIT.s }
     const { value, unit } = query
+
+    const [reInitiateTimer, setReInitiateTimer] = useState<boolean>(false)
 
     const goBack = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
@@ -85,10 +69,18 @@ const ClockPage: React.FC = () => {
     }
 
     return (<StyledContainer>
-        <Clock unit={unit as TIME_UNIT | undefined} value={Number(value)} />
-        <StyledButton data-testid="start-button">
+        <div style={{ height: "400px", width: "400px" }}>
+            {reInitiateTimer ?
+                <Clock unit={unit as TIME_UNIT | undefined} value={Number(value)} /> :
+                <StyledTimer />
+            }
+        </div>
+        <StyledButton data-testid="start-button" onClick={() => {
+            setReInitiateTimer(true)
+        }}>
             start button
         </StyledButton>
+
         <StyledButton data-testid="back-button" onClick={goBack}>
             Go to timer setup page
         </StyledButton>
