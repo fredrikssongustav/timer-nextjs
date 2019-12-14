@@ -9,9 +9,9 @@ type FormState = {
 }
 
 type IndexFormProps = {
-  submitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  submitForm: (event: React.ChangeEvent<HTMLFormElement>) => void;
   formState: FormState;
-  updateState: (event: React.FormEvent<HTMLInputElement>) => void;
+  updateState: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }: IndexFormProps) => {
@@ -48,12 +48,13 @@ const IndexPage: React.FC = () => {
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
       <meta charSet="utf-8" />
+      <title>A Timer</title>
     </Head>
     <style>{`
       body { 
-        background: #313639;
         font: 11px menlo;
         color: #fff;
+        margin:0;
       }
     `}</style>
     <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
