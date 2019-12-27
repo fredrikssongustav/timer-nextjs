@@ -7,6 +7,8 @@
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "airbnb"
   ],
   "globals": {
@@ -25,6 +27,21 @@
     "react",
     "@typescript-eslint"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "paths": [
+          "./src"
+        ]
+      }
+    }
+  },
   "rules": {
     "semi": 2,
     "max-len": [
@@ -32,7 +49,6 @@
       80
     ],
     "import/extensions": 0,
-    "no-unused-vars": 1,
     "import/prefer-default-export": 0,
     "import/no-unresolved": [
       1,

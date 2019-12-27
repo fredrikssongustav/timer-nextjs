@@ -4,9 +4,17 @@ import * as React from 'react';
 
 const StyledBox = styled(Box)`
 height:100vh;
-`
+`;
 
-export const StyledContainer: React.FC = ({ children }) => (
-    <StyledBox display="flex" justifyContent="center" alignItems="center" flexDirection="column" >
-        {children}
-    </StyledBox>)
+export const StyledContainer: React.FC = (
+  { children }: React.ComponentProps<React.FunctionComponent>,
+) => (
+  <StyledBox
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="column"
+  >
+    {children}
+  </StyledBox>
+);
