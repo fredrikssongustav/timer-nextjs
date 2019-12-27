@@ -1,72 +1,139 @@
 import Head from 'next/head';
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import Router from 'next/router';
+import {
+  MenuItem,
+} from '@material-ui/core';
 import { StyledButton } from '../src/atoms/StyledButton';
-import { StyledInput } from '../src/atoms/StyledInput';
 import { StyledContainer } from '../src/containers/StyledContainer/StyledContainer';
+import { StyledSelect } from '../src/atoms/StyledSelect';
+
+export enum FormStateFields {
+  S = 'S',
+  M = 'M',
+  H = 'H',
+  D = 'D',
+  Y = 'Y'
+}
 
 type FormState = {
-  unit: string;
-  value: string;
+  [key in FormStateFields]: string;
 }
 
 type IndexFormProps = {
   submitForm: (event: React.ChangeEvent<HTMLFormElement>) => void;
   formState: FormState;
-  updateState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  updateState: (newState: any) => void;
 }
 
-export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }: IndexFormProps) => {
-  return (
-    <form data-testid="index-form" onSubmit={submitForm}>
-      <StyledInput inputProps={{ "data-testid": "field-timevalue" }} type="text" name="value" value={formState.value} onChange={updateState} />
-      <StyledInput inputProps={{ "data-testid": "field-timeunit" }} type="text" name="unit" value={formState.unit} onChange={updateState} />
-      <StyledButton data-testid="submit-button" type="submit">
+export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }: IndexFormProps) => (
+  <form data-testid="index-form" onSubmit={submitForm}>
+    <StyledSelect
+      data-testid="field-y"
+      value={formState.Y}
+      setValue={updateState}
+      placeholder="years"
+      field={FormStateFields.Y}
+    >
+      {
+          Array(10).fill(undefined).map((element: any, index: number) => (
+            <MenuItem value={index}>{index}</MenuItem>))
+        }
+    </StyledSelect>
+    <StyledSelect
+      data-testid="field-d"
+      value={formState.D}
+      setValue={updateState}
+      placeholder="days"
+      field={FormStateFields.D}
+    >
+      {
+          Array(365).fill(undefined).map((element: any, index: number) => (
+            <MenuItem value={index}>{index}</MenuItem>))
+        }
+    </StyledSelect>
+    <StyledSelect
+      data-testid="field-h"
+      value={formState.H}
+      setValue={updateState}
+      placeholder="hours"
+      field={FormStateFields.H}
+    >
+      {
+          Array(24).fill(undefined).map((element: any, index: number) => (
+            <MenuItem value={index}>{index}</MenuItem>))
+        }
+    </StyledSelect>
+    <StyledSelect
+      data-testid="field-m"
+      value={formState.M}
+      setValue={updateState}
+      placeholder="minutes"
+      field={FormStateFields.M}
+    >
+      {
+          Array(60).fill(undefined).map((element: any, index: number) => (
+            <MenuItem value={index}>{index}</MenuItem>))
+        }
+    </StyledSelect>
+    <StyledSelect
+      data-testid="field-s"
+      value={formState.S}
+      setValue={updateState}
+      placeholder="seconds"
+      field={FormStateFields.S}
+    >
+      {
+          Array(60).fill(undefined).map((element: any, index: number) => (
+            <MenuItem value={index}>{index}</MenuItem>))
+        }
+    </StyledSelect>
+    <StyledButton data-testid="submit-button" type="submit">
         Launch timer
-     </StyledButton>
-    </form>);
-};
+    </StyledButton>
+  </form>
+);
 
 const IndexPage: React.FC = () => {
-  const [state, setState] = useState<FormState>({ value: "10", unit: "second(s)" });
+  const [state, setState] = useState<FormState>({
+    S: '10', M: '', H: '', D: '', Y: '',
+  });
 
-  const updateState = (event: React.FormEvent<HTMLInputElement>) => {
-    var newState = state;
-    const targetStateKey: string = event.currentTarget.name;
-    const targetStateValue: string = event.currentTarget.value;
-    if (targetStateKey === "value" || targetStateKey === "unit") {
-      newState[targetStateKey] = targetStateValue;
-      setState(state => ({ ...state, newState }));
-    }
+  const updateState = (newState) => {
+    setState({ ...state, ...newState });
   };
 
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     Router.push({
       pathname: '/clock',
-      query: state
+      query: state,
     });
   };
 
-  return (<div>
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
-      <meta charSet="utf-8" />
-      <title>A Timer</title>
-    </Head>
-    <style>{`
+  return (
+    <div>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
+        <meta charSet="utf-8" />
+        <title>A Timer</title>
+      </Head>
+      <style>
+        {`
       body { 
         font: 11px menlo;
         color: #fff;
         margin:0;
       }
-    `}</style>
-    <StyledContainer>
-      <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
-    </StyledContainer>
+    `}
+      </style>
+      <StyledContainer>
+        <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
+      </StyledContainer>
 
-  </div >);
+    </div>
+  );
 };
 
 export default IndexPage;
