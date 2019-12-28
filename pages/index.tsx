@@ -18,7 +18,7 @@ export enum FormStateFields {
 }
 
 type FormState = {
-  [key in FormStateFields]: string;
+  [key in FormStateFields]?: string;
 }
 
 type IndexFormProps = {
@@ -30,7 +30,6 @@ type IndexFormProps = {
 export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, updateState }: IndexFormProps) => (
   <form data-testid="index-form" onSubmit={submitForm}>
     <StyledSelect
-      data-testid="field-y"
       value={formState.Y}
       setValue={updateState}
       placeholder="years"
@@ -42,7 +41,6 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
         }
     </StyledSelect>
     <StyledSelect
-      data-testid="field-d"
       value={formState.D}
       setValue={updateState}
       placeholder="days"
@@ -54,7 +52,6 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
         }
     </StyledSelect>
     <StyledSelect
-      data-testid="field-h"
       value={formState.H}
       setValue={updateState}
       placeholder="hours"
@@ -66,7 +63,6 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
         }
     </StyledSelect>
     <StyledSelect
-      data-testid="field-m"
       value={formState.M}
       setValue={updateState}
       placeholder="minutes"
@@ -78,7 +74,6 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
         }
     </StyledSelect>
     <StyledSelect
-      data-testid="field-s"
       value={formState.S}
       setValue={updateState}
       placeholder="seconds"

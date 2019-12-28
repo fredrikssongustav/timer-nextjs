@@ -19,12 +19,12 @@ type StyledSelectProps = React.ComponentProps<FunctionComponent> & {
 
 
 export const StyledSelect: React.FC<StyledSelectProps> = ({
-  children, setValue, value, placeholder, field,
+  children, setValue, value, placeholder, field, ...props
 }: StyledSelectProps) => (
-  <FormControl>
-    <InputLabel id="demo-simple-select-label">{placeholder}</InputLabel>
+  <FormControl {...props} data-testid="select-field">
+    <InputLabel>{placeholder}</InputLabel>
     <StyledSelectInner
-      id="demo-simple-select"
+      data-testid="select-field-input"
       value={value}
       onChange={(e: React.ChangeEvent<{ value: unknown }>): void => {
         const newState = {};

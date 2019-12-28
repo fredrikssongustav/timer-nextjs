@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
   "extends": [
     "prettier",
@@ -25,6 +26,7 @@
   },
   "plugins": [
     "react",
+    "jest",
     "@typescript-eslint"
   ],
   "settings": {
@@ -53,6 +55,7 @@
     "import/no-unresolved": [
       1,
     ],
+    "react/jsx-props-no-spreading": 1,
     "react/jsx-filename-extension": [
       1,
       {
