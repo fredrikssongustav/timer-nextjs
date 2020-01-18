@@ -57,9 +57,9 @@ describe('Clock page', () => {
   });
 
   describe('should on init', () => {
-    it('show something refered to as clock', () => {
+    it('show fail due to lacking default values and query params', () => {
       const { getByTestId } = render(<ClockPage />);
-      expect(getByTestId('clock-svg')).toBeTruthy();
+      expect(getByTestId('failed-clock')).toBeTruthy();
     });
 
     it('show some button to start clock', () => {

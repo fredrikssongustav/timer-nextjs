@@ -15,7 +15,7 @@ export const ClockController: React.FC<ClockControllerProps> = (
   const [controllerState, setControllerState] = useState<{[K in TIME_UNIT]?: string} |undefined>(undefined);
 
   useEffect(() => {
-    const queryParams = router.query;
+    const queryParams = router && router.query;
     setControllerState(queryParams);
   }, []);
 
