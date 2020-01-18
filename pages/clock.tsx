@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { StyledButton } from '../src/atoms/StyledButton';
 import { StyledContainer } from '../src/containers/StyledContainer/StyledContainer';
 import { StyledTimer } from '../src/organisms/StyledTimer/StyledTimer';
+import { Clock } from '../src/components/Clock';
 
 export enum TIME_UNIT {
     h = 'hour',
@@ -10,50 +11,6 @@ export enum TIME_UNIT {
     d = 'day',
     y = 'year'
 }
-
-export type ClockProps = {
-    unit: TIME_UNIT | undefined;
-    value: number | undefined;
-}
-
-export const Clock: React.FC<ClockProps> = ({ unit, value }: ClockProps) => {
-  const refinedValue = value as number;
-
-  const [stopTime, setStopTime] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    setStopTime(value);
-  }, []);
-
-  const reduceStopTime = (): void => {
-    if (stopTime) {
-      // const fraction = stopTime && stopTime / 100;
-      setStopTime(stopTime - 1);
-    }
-  };
-
-  useEffect(() => {
-    if (stopTime && stopTime > 0) {
-      setTimeout(reduceStopTime, 1000);
-    }
-  }, [stopTime]);
-
-  if (!stopTime && stopTime !== 0) {
-    return <div data-testid="failed-clock" />;
-  }
-
-  if (stopTime <= 0) {
-    return <div data-testid="done-counting" />;
-  }
-
-
-  return (
-    <StyledTimer
-      progress={((refinedValue - stopTime) / refinedValue) * 100}
-      color="#000"
-    />
-  );
-};
 
 const ClockPage: React.FC = () => {
   const router = useRouter();
