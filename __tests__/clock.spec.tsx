@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, wait } from '@testing-library/react';
-import ClockPage, { Clock, TIME_UNIT } from '../pages/clock';
+import ClockPage from '../pages/clock';
+import { Clock } from '../src/components/Clock';
 
 
 describe('Clock component', () => {
@@ -11,8 +12,8 @@ describe('Clock component', () => {
       const timerValue = 1;
       const timeNow = Date.now();
       const { getByTestId } = render(<Clock
-        unit={TIME_UNIT.s}
-        value={timerValue}
+        state={{ S: timerValue.toString() }}
+        startClock
       />);
       await wait(() => getByTestId('done-counting'));
       const timeThen = Date.now();
@@ -22,16 +23,16 @@ describe('Clock component', () => {
 
     it('should be able to know when something is wrong', () => {
       const { getByTestId } = render(<Clock
-        unit={TIME_UNIT.s}
-        value={undefined}
+        state={{ S: 'asd' }}
+        startClock
       />);
       expect(getByTestId('failed-clock')).toBeTruthy();
     });
 
     it('should be able to know something to count', () => {
       const { getByTestId } = render(<Clock
-        unit={TIME_UNIT.s}
-        value={5}
+        state={{ S: '2' }}
+        startClock={false}
       />);
       expect(getByTestId('clock-svg')).toBeTruthy();
     });
@@ -39,8 +40,8 @@ describe('Clock component', () => {
 
   it('should render', () => {
     const { getByTestId } = render(<Clock
-      unit={TIME_UNIT.s}
-      value={5}
+      state={{ S: '2' }}
+      startClock={false}
     />);
     expect(getByTestId('clock-svg')).toBeTruthy();
   });
