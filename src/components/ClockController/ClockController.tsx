@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { TIME_UNIT } from '../../utils/types';
-import { Clock } from '../Clock';
 import { ClockContainer } from './ClockController.styles';
+import { Clock } from '../Clock/Clock';
 
 type ClockControllerProps = {
     startClock: boolean;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { TIME_UNIT } from '../utils/types';
-import { StyledTimer } from '../organisms/StyledTimer/StyledTimer';
+import { TIME_UNIT } from '../../utils/types';
+import { StyledTimer } from '../../organisms/StyledTimer/StyledTimer';
+import { StyledCountDown } from './Clock.styles';
 
 export type ClockProps = {
     state: {[K in TIME_UNIT]?: string};
@@ -56,6 +57,9 @@ export const Clock: React.FC<ClockProps> = ({ state, startClock }: ClockProps) =
     return (
       <div data-testid="done-counting">
         <StyledTimer />
+        <StyledCountDown>
+          {stopTime}
+        </StyledCountDown>
       </div>
     );
   }
@@ -70,6 +74,9 @@ export const Clock: React.FC<ClockProps> = ({ state, startClock }: ClockProps) =
           />
         )
         : <StyledTimer />}
+      <StyledCountDown>
+        {stopTime}
+      </StyledCountDown>
     </>
   );
 };

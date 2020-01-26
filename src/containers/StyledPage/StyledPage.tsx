@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as ThemeProviderMUI, createMuiTheme, StylesProvider } from '@material-ui/core/styles';
+import { ThemeProvider as ThemeProviderSC } from 'styled-components';
 import { StyledContainer } from '../StyledContainer/StyledContainer';
 
 const theme = createMuiTheme({
@@ -25,11 +26,18 @@ export const StyledPage = ({ children }) => (
       }
     `}
     </style>
-    <ThemeProvider theme={theme}>
-      <span />
-      <StyledContainer>
-        {children}
-      </StyledContainer>
-    </ThemeProvider>
+    <StylesProvider injectFirst>
+
+      <ThemeProviderMUI theme={theme}>
+      ThemeProvider as MuiThemeProvider,
+        <ThemeProviderSC theme={theme}>
+          <span />
+          <StyledContainer>
+            {children}
+          </StyledContainer>
+        </ThemeProviderSC>
+      </ThemeProviderMUI>
+    </StylesProvider>
+
   </div>
 );
