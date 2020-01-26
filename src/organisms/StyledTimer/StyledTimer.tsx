@@ -7,7 +7,7 @@ type StyledTimerProps = {
 }
 
 export const StyledTimer: React.FC<StyledTimerProps> = (
-  { progress = 100, color = '#000' }: StyledTimerProps,
+  { progress = 100, color = '#283F3B' }: StyledTimerProps,
 ) => (
   <CircleSVG progress={progress} color={color} />
 );

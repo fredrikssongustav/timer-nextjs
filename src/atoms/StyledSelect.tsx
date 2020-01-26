@@ -4,11 +4,19 @@ import styled from 'styled-components';
 import { FormStateFields } from '../../pages';
 
 
-const StyledSelectInner = styled(Select)`
-width:100px;
-margin-right:10px;
-
+const StyledFormControl = styled(FormControl)`
+width:100%;
+&& {
+  margin-bottom:10px;
+  div:focus{background-color: white;};
+};
 `;
+
+const StyledInputLabel = styled(InputLabel)`
+background:white;
+&& {
+  padding:0px 4px;
+}`;
 
 type StyledSelectProps = React.ComponentProps<FunctionComponent> & {
     value: string;
@@ -21,9 +29,9 @@ type StyledSelectProps = React.ComponentProps<FunctionComponent> & {
 export const StyledSelect: React.FC<StyledSelectProps> = ({
   children, setValue, value, placeholder, field, ...props
 }: StyledSelectProps) => (
-  <FormControl {...props} data-testid="select-field">
-    <InputLabel>{placeholder}</InputLabel>
-    <StyledSelectInner
+  <StyledFormControl {...props} data-testid="select-field" variant="outlined">
+    <StyledInputLabel>{placeholder}</StyledInputLabel>
+    <Select
       data-testid="select-field-input"
       value={value}
       onChange={(e: React.ChangeEvent<{ value: unknown }>): void => {
@@ -33,6 +41,6 @@ export const StyledSelect: React.FC<StyledSelectProps> = ({
       }}
     >
       {children}
-    </StyledSelectInner>
-  </FormControl>
+    </Select>
+  </StyledFormControl>
 );

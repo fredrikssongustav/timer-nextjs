@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { useState } from 'react';
 
 import Router from 'next/router';
@@ -6,8 +5,9 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { StyledButton } from '../src/atoms/StyledButton';
-import { StyledContainer } from '../src/containers/StyledContainer/StyledContainer';
 import { StyledSelect } from '../src/atoms/StyledSelect';
+import { StyledFormContainer } from '../src/containers/StyledFormContainer/StyledFormContainer';
+import { StyledPage } from '../src/containers/StyledPage/StyledPage';
 
 export enum FormStateFields {
   S = 'S',
@@ -32,7 +32,7 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
     <StyledSelect
       value={formState.Y}
       setValue={updateState}
-      placeholder="years"
+      placeholder="YEARS"
       field={FormStateFields.Y}
     >
       {
@@ -43,7 +43,7 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
     <StyledSelect
       value={formState.D}
       setValue={updateState}
-      placeholder="days"
+      placeholder="DAYS"
       field={FormStateFields.D}
     >
       {
@@ -54,7 +54,7 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
     <StyledSelect
       value={formState.H}
       setValue={updateState}
-      placeholder="hours"
+      placeholder="HOURS"
       field={FormStateFields.H}
     >
       {
@@ -64,8 +64,9 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
     </StyledSelect>
     <StyledSelect
       value={formState.M}
+      key="min"
       setValue={updateState}
-      placeholder="minutes"
+      placeholder="MINUTES"
       field={FormStateFields.M}
     >
       {
@@ -76,7 +77,7 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
     <StyledSelect
       value={formState.S}
       setValue={updateState}
-      placeholder="seconds"
+      placeholder="SECONDS"
       field={FormStateFields.S}
     >
       {
@@ -84,7 +85,13 @@ export const IndexForm: React.FC<IndexFormProps> = ({ submitForm, formState, upd
             <MenuItem value={index}>{index}</MenuItem>))
         }
     </StyledSelect>
-    <StyledButton data-testid="submit-button" type="submit">
+    <StyledButton
+      data-testid="submit-button"
+      type="submit"
+      variant="outlined"
+      color="primary"
+      size="large"
+    >
         Launch timer
     </StyledButton>
   </form>
@@ -108,26 +115,11 @@ const IndexPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no" />
-        <meta charSet="utf-8" />
-        <title>A Timer</title>
-      </Head>
-      <style>
-        {`
-      body { 
-        font: 11px menlo;
-        color: #fff;
-        margin:0;
-      }
-    `}
-      </style>
-      <StyledContainer>
+    <StyledPage>
+      <StyledFormContainer>
         <IndexForm submitForm={submitForm} formState={state} updateState={updateState} />
-      </StyledContainer>
-
-    </div>
+      </StyledFormContainer>
+    </StyledPage>
   );
 };
 

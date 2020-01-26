@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
 export const ClockContainer = styled.div`
-height:500px;
-width:500px;`;
+max-height:300px;
+max-width:300px;
+width:100%;`;

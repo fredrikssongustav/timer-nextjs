@@ -53,7 +53,11 @@ export const Clock: React.FC<ClockProps> = ({ state, startClock }: ClockProps) =
   }
 
   if (stopTime <= 0) {
-    return <div data-testid="done-counting" />;
+    return (
+      <div data-testid="done-counting">
+        <StyledTimer />
+      </div>
+    );
   }
 
 
@@ -63,7 +67,6 @@ export const Clock: React.FC<ClockProps> = ({ state, startClock }: ClockProps) =
         ? (
           <StyledTimer
             progress={((refinedValue - stopTime) / refinedValue) * 100}
-            color="#000"
           />
         )
         : <StyledTimer />}

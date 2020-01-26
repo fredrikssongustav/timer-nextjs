@@ -15,7 +15,7 @@ export const CircleSVG: React.FC<CircleSVGProps> = (
         a 15.9155 15.9155 0 0 1 0 -31.831"
       fill="none"
       stroke={color.toString()}
-      strokeWidth="3"
+      strokeWidth="4"
       strokeDasharray={`${progress.toString()},100`}
     />
   </svg>
